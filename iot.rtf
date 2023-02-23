@@ -1,0 +1,127 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2707
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 //To interface LED/Buzzer with Arduino and write a program to turn ON LED for 1 sec after every 2 seconds.\
+int led = 2; int led2 = 5; int led3 = 7;\
+\
+void setup() \{\
+// initialize the digital pin as an output. pinMode(led, OUTPUT); pinMode(led2, OUTPUT); pinMode(led3, OUTPUT);\
+\}\
+void loop() \{\
+digitalWrite(led, HIGH); // turn the 1st LED on delay(1000);	// wait for 1 second digitalWrite(led2, HIGH);\
+delay(1000); digitalWrite(led3, HIGH); delay(2000); digitalWrite(led3, LOW); digitalWrite(led2, LOW);\
+digitalWrite(led, LOW);	// turn the LED off\
+\}\
+\
+// push button\
+const int pushButton = 2\
+const int led1 = 10\
+const int led2 = 11\
+const int led3 = 12\
+\
+void setup()\
+\{\
+pinMode(led1, OUTPUT); pinMode(led2, OUTPUT); pinMode(led3, OUTPUT); pinMode(pushButton, INPUT);\
+\}\
+\
+void loop()\{\
+	buttonState = digitalRead(pushButton);\
+	if(buttonState == HIGH)\{\
+		digitalWrite(led1, HIGH);\
+		delay(100);\
+		digitalWrite(led2, HIGH);\
+		delay(100);\
+		digitalWrite(led3, HIGH);\
+		delay(100);\
+		digitalWrite(led1, LOW);\
+		delay(100);\
+		digitalWrite(led2, LOW);\
+		delay(100);\
+		digitalWrite(led3, LOW);\
+		delay(100);\
+	\}\
+	else\{\
+		digitalWrite(led1, LOW);\
+		digitalWrite(led2, LOW);\
+		digitalWrite(led3, LOW);\
+	\}\
+\}\
+\
+//3\
+const int ledred=11; const int ledgreen=12; const int ledyellow=13; const int ldrPin=A0; void setup()\
+\{\
+pinMode(ledred, OUTPUT); pinMode(ledgreen, OUTPUT); pinMode(ledyellow, OUTPUT); pinMode(ldrPin,INPUT); Serial.begin(9600);\
+\}\
+void loop()\
+\{\
+\
+int ldrstatus=analogRead(ldrPin); Serial.println( ldrstatus); if(ldrstatus<=200)\
+\{\
+digitalWrite(ledred,HIGH); digitalWrite(ledgreen,LOW); digitalWrite(ledyellow,LOW);\
+\}\
+else if(ldrstatus>200 && ldrstatus<=500)\{ digitalWrite(ledred,HIGH); digitalWrite(ledgreen,HIGH); digitalWrite(ledyellow,LOW);\
+\}\
+else\
+\{\
+digitalWrite(ledred,HIGH); digitalWrite(ledgreen,HIGH);\
+\
+digitalWrite(ledyellow,HIGH);\
+\}\
+\}\
+\
+\
+//4 \
+char value;\
+const int ledred =3;\
+const int ledyellow=4;\
+const int ledgreen=5; \
+const int ldrPin=A0;\
+void setup() \
+\{\
+pinMode(ledred,OUTPUT);\
+pinMode(ledyellow,OUTPUT);\
+pinMode(ledgreen,OUTPUT);\
+Serial.begin(9600);\
+pinMode(ldrPin,INPUT);\
+\}\
+\
+void loop() \
+\{\
+if(Serial.available())\
+\{\
+value=Serial.read();\
+Serial.println(value);\
+\}\
+unsigned int analogvalue;\
+analogvalue=analogRead(A0);\
+Serial.println(analogvalue);\
+if(value == 'A')\
+\{\
+digitalWrite(ledred,HIGH);\
+\}\
+else if(value == 'a')\
+\{\
+digitalWrite(ledred,LOW);\
+\}\
+else if(value == 'B')\
+\{\
+digitalWrite(ledyellow,HIGH);\
+\}\
+else if(value == 'b')\
+\{\
+digitalWrite(ledyellow,LOW);\
+\}\
+else if(value == 'C')\
+\{\
+digitalWrite(ledgreen,HIGH);\
+\}\
+else if(value == 'c')\
+\{\
+digitalWrite(ledgreen,LOW);\
+\}\
+\}\
+}
